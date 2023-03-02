@@ -4,10 +4,13 @@ on:
     tags:
       - 'v*.*.*'
 jobs:
-  docker:
+  build-and-push-image:
     env:
       IMAGE_NAME: autoinstrumentation-go
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,4 +41,5 @@ jobs:
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
