@@ -41,13 +41,13 @@ offsets:
 	cd offsets-tracker; OFFSETS_OUTPUT_FILE="../pkg/inject/offset_results.json" go run main.go
 
 .PHONY: update-licenses
-update-licenses: | $(GOLICENSES)
+update-licenses: | generate $(GOLICENSES)
 	rm -rf LICENSES
 	$(GOLICENSES) save ./cli/ --save_path LICENSES
 	cp -R ./include/libbpf ./LICENSES
 
 .PHONY: verify-licenses
-verify-licenses: | $(GOLICENSES)
+verify-licenses: | generate $(GOLICENSES)
 	$(GOLICENSES) save ./cli --save_path temp
 	cp -R ./include/libbpf ./temp; \
     if diff temp LICENSES > /dev/null; then \
