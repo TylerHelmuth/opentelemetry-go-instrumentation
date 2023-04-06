@@ -54,6 +54,8 @@ update-licenses: $(GOLICENSES)
 verify-licenses: $(GOLICENSES)
 	CFLAGS=$(BPF_INCLUDE)
 	export CFLAGS
+	go mod tidy
+	go generate ./...
 	$(GOLICENSES) save ./cli --save_path temp
 	cp -R ./include/libbpf ./temp; \
     if diff temp LICENSES > /dev/null; then \
