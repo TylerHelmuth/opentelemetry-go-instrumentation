@@ -52,7 +52,8 @@ update-licenses: $(GOLICENSES)
 
 .PHONY: verify-licenses
 verify-licenses: $(GOLICENSES)
-	export CFLAGS=$(BPF_INCLUDE)
+	CFLAGS=$(BPF_INCLUDE)
+	export CFLAGS
 	$(GOLICENSES) save ./cli --save_path temp
 	cp -R ./include/libbpf ./temp; \
     if diff temp LICENSES > /dev/null; then \
