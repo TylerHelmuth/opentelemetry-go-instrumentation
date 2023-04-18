@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-push-image:
     env:
-      IMAGE_NAME: autoinstrumentation-go
+      IMAGE_NAME: autoinstrumentation-go-testing
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,7 +34,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            otel/${{ env.IMAGE_NAME }}
+            thelmuth34/${{ env.IMAGE_NAME }}
             ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}
       - name: Build and push
         uses: docker/build-push-action@v4
